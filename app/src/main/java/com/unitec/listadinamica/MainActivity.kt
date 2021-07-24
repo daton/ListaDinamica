@@ -27,8 +27,15 @@ class MainActivity : AppCompatActivity() {
         u3.email="tercera@gmail.com"
         u3.nombre="Pedro"
         u3.edad=23
+
+        var u4=Usuario()
+        u4.email="cuarto@gmail.com"
+        u4.nombre="Maria"
+        u4.edad=24
+
+
         //Generamos la lista dinamica fake
-        var usuarios= arrayListOf<Usuario>(u1,u2,u3)
+        var usuarios= arrayListOf(u1,u2,u3,u4)
 
         val usuarioAdapter=UsuarioAdapter{usuario ->adapterOnClick(usuario)  }
 
