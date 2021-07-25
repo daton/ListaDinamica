@@ -1,5 +1,6 @@
 package com.unitec.listadinamica
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -51,9 +52,9 @@ class MainActivity : AppCompatActivity() {
    //Finalmente agregamos el metodo adapterOnClick, el cual aciva el onClick de cada
    fun adapterOnClick(usuario:Usuario) {
        //Aqui tendriamos que inyectarle ora vista para que nos lleve a esa vista
-       //  var intent=Intent(this, OtraActivityQueNoHemosCreado::class.java)
-       //intent.putExtra("email",usuario.email)
-       //startActivity(intent)
+         var intent= Intent(this, DetallesActivity::class.java)
+       intent.putExtra("usuario",usuario)
+       startActivity(intent)
       Toast.makeText(this, usuario.email, Toast.LENGTH_LONG).show()
    }
 
