@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
    fun adapterOnClick(usuario:Usuario) {
        //Aqui tendriamos que inyectarle ora vista para que nos lleve a esa vista
          var intent= Intent(this, DetallesActivity::class.java)
-       intent.putExtra("usuario",usuario)
+         intent.putExtra("usuario",usuario)
        startActivity(intent)
       Toast.makeText(this, usuario.email, Toast.LENGTH_LONG).show()
    }

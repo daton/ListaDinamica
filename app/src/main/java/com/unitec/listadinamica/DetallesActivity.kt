@@ -9,8 +9,12 @@ class DetallesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles)
 
-    var usuario=    intent.extras?.getSerializable("usuario") as Usuario
-       var detalleNombre= findViewById<TextView>(R.id.detalleNombre)
+       var usuario=    intent.extras?.getSerializable("usuario") as Usuario
+       var detalleNombre= findViewById<TextView>(R.id.detallesNombre)
+        var detallesEmail=findViewById<TextView>(R.id.detallesEmail)
+        var detallesEdad=findViewById<TextView>(R.id.detallesEdad)
         detalleNombre.text=usuario.nombre
+        detallesEmail.text=usuario.email
+        detallesEdad.text=usuario.edad.toString()
     }
 }
