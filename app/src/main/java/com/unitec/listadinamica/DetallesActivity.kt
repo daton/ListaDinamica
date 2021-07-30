@@ -15,6 +15,6 @@ class DetallesActivity : AppCompatActivity() {
         var detallesEdad=findViewById<TextView>(R.id.detallesEdad)
         detalleNombre.text=usuario.nombre
         detallesEmail.text=usuario.email
-        detallesEdad.text=usuario.edad.toString()
+        detallesEdad.text=usuario.nickname.toString()
     }
 }

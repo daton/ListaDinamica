@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.jackson.JacksonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         /* Aqui iria en la de localiza amigos un servicio REST que nos invocara
         //(callback) de los usuarios del back end, pero ahora simplemente creamos unos
         usuario fake.
-         */
+
         var u1=Usuario()
         u1.email="primero@gmail.com"
         u1.nombre="Juan"
@@ -37,15 +42,39 @@ class MainActivity : AppCompatActivity() {
 
         //Generamos la lista dinamica fake
         var usuarios= arrayListOf(u1,u2,u3,u4)
+     */
 
-        val usuarioAdapter=UsuarioAdapter{usuario ->adapterOnClick(usuario)  }
+        //Empezamos con retrofit
+        GlobalScope.launch(Dispatchers.IO){
+            //REcuerda que este disptachers IO es para conectarse en una tarea asincronica al back end
+            var retrofit= Retrofit.Builder()
+                .baseUrl("https://localiza-amigos2.herokuapp.com/")
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build()
 
-        //INvocamos el recuclerView
-        val recyclerView:RecyclerView=findViewById(R.id.recycler_view)
-        //Inyectamos el recycler
-        recyclerView.adapter=usuarioAdapter
+            //Invocamos els ervicios
+            var servicioUsuarios=retrofit.create(ServicioUsuario::class.java)
+            var hacerRequest=servicioUsuarios.buscarLozalizados()
+            var usuarios=hacerRequest.execute().body()!!
 
-        usuarioAdapter.submitList(usuarios)
+
+            launch(Dispatchers.Main){
+                val usuarioAdapter=UsuarioAdapter{usuario ->adapterOnClick(usuario)  }
+
+                //INvocamos el recuclerView
+                val recyclerView:RecyclerView=findViewById(R.id.recycler_view)
+                //Inyectamos el recycler
+                recyclerView.adapter=usuarioAdapter
+
+                usuarioAdapter.submitList(usuarios)
+            }
+        }
+
+
+
+
+
+
 
 
     }

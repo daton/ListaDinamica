@@ -37,7 +37,7 @@ class UsuarioAdapter(private val onClick:(Usuario)->Unit)
                //Deespues iniciamos los valores
                usuarioNombre.text=usuario.nombre
                usuarioEmail.text=usuario.email
-               usuarioEdad.text=usuario.edad.toString()
+               usuarioEdad.text=usuario.nickname
 
             }
          }//Llave de cierre de la clase internal
